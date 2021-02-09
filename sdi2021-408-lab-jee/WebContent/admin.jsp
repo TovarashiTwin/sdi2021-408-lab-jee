@@ -24,7 +24,7 @@
 	<jsp:setProperty name="producto" property="*" />
 	<c:if test= "${producto.nombre != null}">
 		<jsp:useBean id="productosService" class="com.uniovi.sdi.ProductosService"/>
-		<jsp:setProperty name="productosService"property="nuevoProducto"value="${producto}"/>
+		<jsp:setProperty name="productosService" property="nuevoProducto" value="${producto}"/>
 		<c:redirect url="/index.jsp"/>
 	</c:if>
 	<!--Contenido -->

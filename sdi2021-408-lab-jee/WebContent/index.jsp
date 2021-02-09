@@ -31,6 +31,7 @@
 		<ul class="nav navbar-nav">
 			<li><a href="incluirEnCarrito">Carrito</a></li>
 			<li><a href="login.jsp">Login</a></li>
+			<li><a href="productos">Productos</a></li>
 			<li><a href="admin.jsp">Administrar productos</a></li>
 		</ul>
 		<div class="nav navbar-right">
