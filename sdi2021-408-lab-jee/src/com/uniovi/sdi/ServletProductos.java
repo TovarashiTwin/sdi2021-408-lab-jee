@@ -34,14 +34,14 @@ public class ServletProductos extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		List<Producto> listaProductos = new ProductosService().getProductos();
-		List<String> listaProductosString = new ArrayList<>();
-		for(Producto theProducto:listaProductos)
-			listaProductosString.add(theProducto.getNombre());
+		//List<String> listaProductosString = new ArrayList<>();
+		//for(Producto theProducto:listaProductos)
+		//	listaProductosString.add(theProducto.getNombre());
 
 		//request.getSession().setAttribute("productos", listaProductosString);
 
 		//Retomo la vista a vista-productos		
-		request.setAttribute("productosTienda", listaProductosString);
+		request.setAttribute("productosTienda", listaProductos);
 		getServletContext().getRequestDispatcher("/vista-productos.jsp").forward(request,	response);
 	}
 

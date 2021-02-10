@@ -30,21 +30,39 @@ public class ServletQuitarCarrito extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub<
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		//Sacamos la key del elemento que queremos quitar		
 
 		ConcurrentHashMap<String,Integer> carrito =	(ConcurrentHashMap<String,Integer>) request.getSession().getAttribute("carrito");
-		String producto = request.getParameter("producto");
 
-		Iterator<Entry<String,Integer>> iterator = carrito.entrySet().iterator();
-		while(iterator.hasNext()){
-			Entry<String, Integer> entry = iterator.next();
-			if(entry.getKey().equals(producto)) {
-				iterator.remove();
+		if (carrito == null) {
+			carrito = new ConcurrentHashMap<String, Integer>();
+			request.getSession().setAttribute("carrito", carrito);
+		}
+		String producto = request.getParameter("producto");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html");
+		
+		if(producto != null) {
+			Integer numeroProducto = carrito.get(producto);
+			if(numeroProducto != null) {
+				if(numeroProducto == 1)				
+					carrito.remove(producto);
+				else{
+					carrito.put(producto, numeroProducto -1);
+				}
 			}
 		}
+		
+//		Iterator<Entry<String,Integer>> iterator = carrito.entrySet().iterator();
+//		while(iterator.hasNext()){
+//			Entry<String, Integer> entry = iterator.next();
+//			if(entry.getKey().equals(producto)) {
+//				iterator.remove();
+//			}
+//		}
 
 
 		//"Pasamos" el parametro
