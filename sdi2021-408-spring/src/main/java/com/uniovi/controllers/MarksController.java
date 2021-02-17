@@ -25,7 +25,7 @@ public class MarksController {
 		}
 	@RequestMapping(value="/mark/add", method=RequestMethod.POST )
 	public String setMark(@ModelAttribute Mark mark){
-		marksService.addMark(mark);
+		marksService.addMark(mark);		
 		return "redirect:/mark/list";
 		}
 	@RequestMapping("/mark/details/{id}")

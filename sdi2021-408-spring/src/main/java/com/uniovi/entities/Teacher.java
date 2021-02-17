@@ -14,9 +14,7 @@ public class Teacher {
 	private String primerApellido;
 	private String segundoApellido;
 	
-	public Teacher() {
-		
-	}
+
 	
 	public Teacher(long id, String dni, String nombre, String primerApellido, String segundoApellido) {
 		super();
@@ -25,6 +23,10 @@ public class Teacher {
 		this.nombre = nombre;
 		this.primerApellido = primerApellido;
 		this.segundoApellido = segundoApellido;
+		System.out.println("params");
+	}
+	public Teacher() {
+		
 	}
 
 	public Long getId() {
