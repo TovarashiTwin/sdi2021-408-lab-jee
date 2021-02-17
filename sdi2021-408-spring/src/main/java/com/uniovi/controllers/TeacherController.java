@@ -35,13 +35,14 @@ public class TeacherController {
 			
 	
 	@RequestMapping("/teacher/details/{id}")
-	public String getDetail(@PathVariable Long id) {
+	public String getDetail(Model model, @PathVariable Long id) {
+		model.addAttribute("teacher", teacherService.getTeacher(id));
 		return "teacher/details";
 	}
 	@RequestMapping("/teacher/delete/{id}")
 	public String deleteTeacher(@PathVariable Long id) {
 		teacherService.deleteTeacher(id);
-		return "Profesor borrado";
+		return "redirect:/teacher/list";
 	}
 	@RequestMapping(value = "/teacher/edit/{id}")
 	public String getEdit(Model model, @PathVariable Long id) {

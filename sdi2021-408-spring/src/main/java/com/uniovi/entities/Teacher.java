@@ -29,6 +29,18 @@ public class Teacher {
 		
 	}
 
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public void setPrimerApellido(String primerApellido) {
+		this.primerApellido = primerApellido;
+	}
+	public void setSegundoApellido(String segundoApellido) {
+		this.segundoApellido = segundoApellido;
+	}
 	public Long getId() {
 		return Long.valueOf(id);
 	}
