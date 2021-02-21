@@ -47,13 +47,13 @@ public class TeacherController {
 	@RequestMapping(value = "/teacher/edit/{id}")
 	public String getEdit(Model model, @PathVariable Long id) {
 		model.addAttribute("teacher",teacherService.getTeacher(id));
-		return "Inicio edit profesor";
+		return "teacher/edit";
 	}
 	@RequestMapping(value = "/teacher/edit/{id}",method=RequestMethod.POST)
 	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute Teacher teacher) {
 		teacher.setId(id);
 		teacherService.addTeacher(teacher);
-		return "Profesor editado";
+		return "redirect:/teacher/details/"+teacher.getId();
 	}
 	
 }

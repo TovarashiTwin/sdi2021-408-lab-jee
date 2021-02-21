@@ -7,8 +7,10 @@
 	<nav th:replace="fragments/nav" />
 
 	<div class="container">
-		<h2>Agregar Teacher</h2>
-		<form class="form-horizontal" method="post" action="/teacher/add">
+		<h2>Editar Profesor</h2>
+
+		<form class="form-horizontal" method="post"
+			th:action="${'/teacher/edit/'+teacher.id}">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="description">Dni:</label>
 				<div class="col-sm-10">
@@ -44,6 +46,7 @@
 				</div>
 			</div>
 		</form>
+
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>
