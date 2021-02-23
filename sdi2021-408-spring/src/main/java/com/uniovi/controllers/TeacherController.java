@@ -31,8 +31,7 @@ public class TeacherController {
 	public String getList(Model model) {
 		model.addAttribute("teacherList",teacherService.getTeachers());
 		return "teacher/list";
-	}
-			
+	}		
 	
 	@RequestMapping("/teacher/details/{id}")
 	public String getDetail(Model model, @PathVariable Long id) {
