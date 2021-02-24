@@ -3,6 +3,8 @@ package com.uniovi.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uniovi.entities.Teacher;
 import com.uniovi.services.TeacherService;
+import com.uniovi.validators.TeacherFormValidator;
 
 @Controller
 public class TeacherController {
@@ -17,8 +20,15 @@ public class TeacherController {
 	@Autowired
 	private TeacherService teacherService;
 	
+	@Autowired
+	private TeacherFormValidator teacherFormValidator;
+	
 	@RequestMapping( value = "/teacher/add", method = RequestMethod.POST)
-	public String setTeacher(@ModelAttribute Teacher teacher) {
+	public String setTeacher(@Validated Teacher teacher, BindingResult result) {
+		teacherFormValidator.validate(teacher, result);
+		if(result.hasErrors()) {
+			return "teacher/add";			
+		}
 		teacherService.addTeacher(teacher);
 		System.out.println(teacher);
 		return "redirect:/teacher/list";

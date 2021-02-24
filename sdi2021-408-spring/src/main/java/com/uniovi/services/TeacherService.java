@@ -25,6 +25,10 @@ public class TeacherService {
 	public Teacher getTeacher(Long id){
 		return teacherRepository.findById(id).get();
 	}
+	public Teacher getTeacherByDni(String dni) {
+		return teacherRepository.findByDni(dni);		
+	}
+	
 	public List<Teacher> getTeachers(){
 		List<Teacher> teachers = new ArrayList<Teacher>();
 		teacherRepository.findAll().forEach(teachers::add);
