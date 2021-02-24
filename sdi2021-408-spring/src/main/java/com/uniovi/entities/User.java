@@ -36,6 +36,7 @@ public class User {
 		this.dni= dni;
 		this.name= name;
 		this.lastName= lastName;
+		//this.password = password;
 		}
 	
 	public User() {

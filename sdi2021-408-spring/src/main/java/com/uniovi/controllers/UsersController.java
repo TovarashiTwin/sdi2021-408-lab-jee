@@ -67,8 +67,14 @@ public class UsersController {
 
 	@RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
 	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute User user) {
-		user.setId(id);
-		usersService.addUser(user);
+		User original = usersService.getUser(id);
+		//user.setId(id);
+		original.setDni(user.getDni());
+		original.setName(user.getName());
+		original.setLastName(user.getLastName());
+		original.setRole(user.getRole());
+		
+		usersService.editUser(original);
 		return "redirect:/user/details/" + id;
 	}
 
@@ -82,7 +88,7 @@ public class UsersController {
 	public String signup(@Validated User user, BindingResult result) {
 		signUpFormValidator.validate(user, result);
 		if(result.hasErrors()) {
-			return "singup";
+			return "signup";
 		}
 		usersService.addUser(user);
 		securityService.autoLogin(user.getDni(), user.getPasswordConfirm());
