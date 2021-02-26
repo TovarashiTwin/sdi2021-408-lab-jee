@@ -1,7 +1,11 @@
 package com.uniovi.services;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +19,8 @@ public class MarksService {
 	@Autowired
 	private MarksRepository marksRepository;	
 
-	
+	@Autowired
+	private HttpSession httpSession;
 
 	public List<Mark> getMarks(){
 		List<Mark> marks = new ArrayList<Mark>();
@@ -24,8 +29,15 @@ public class MarksService {
 	}
 
 	public Mark getMark(Long id){
-		return marksRepository.findById(id).get();
-		}
+		Set<Mark> consultedList = (Set<Mark>) httpSession.getAttribute("consultedList");
+		if(consultedList == null) {
+			consultedList = new HashSet<Mark>();
+		}		
+		Mark obtainedMark = marksRepository.findById(id).get();
+		consultedList.add(obtainedMark);
+		httpSession.setAttribute("consultedList", consultedList);
+		return obtainedMark;
+	}
 	public void addMark(Mark mark){
 		// Si en Id es null le asignamosel ultimo+ 1 de la lista
 		marksRepository.save(mark);
