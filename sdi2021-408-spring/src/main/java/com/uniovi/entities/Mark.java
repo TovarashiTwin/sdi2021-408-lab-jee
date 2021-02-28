@@ -13,6 +13,7 @@ public class Mark {
 	private long id;
 	private String description;
 	private Double score;
+	private Boolean resend = false;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -34,6 +35,14 @@ public class Mark {
 	public Mark() {
 		
 	}
+	
+	public Boolean getResend() {
+		return resend;
+	}
+	public void setResend(Boolean resend) {
+		this.resend = resend;
+	}
+	
 	//Métodos get y setters, autogenerado.
 	public Long getId() {
 		return Long.valueOf(id);//Hacemos este cambio debido a un problema en MarksService
