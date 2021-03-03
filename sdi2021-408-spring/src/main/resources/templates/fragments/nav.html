@@ -31,7 +31,7 @@
 						<li><a href="/user/list" th:text="#{navBar.users.view}"></a></li>
 					</ul></li>
 				<li><a href="/teacher/list" th:text="#{navBar.teachers.view}"></a></li>
-				<li><a href="/teacher/add" th:text="#{navBar.teachers.add}"></a></li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/teacher/add" th:text="#{navBar.teachers.add}"></a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a id="btnLanguage" href="#"
