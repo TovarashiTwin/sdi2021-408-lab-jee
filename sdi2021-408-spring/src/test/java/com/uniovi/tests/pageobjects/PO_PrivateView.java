@@ -28,7 +28,34 @@ public class PO_PrivateView extends PO_NavView {
 		driver.findElement(boton).click();
 	}
 	
-	
+	public static void fillFormAddProfessor(WebDriver driver, int professorOrder, String dni, String nombre, String primerApellido,
+			String segundoApellido) {
+		
+		SeleniumUtils.esperarSegundos(driver, 5);
+		WebElement dniField = driver.findElement(By.name("dni"));
+		dniField.click();
+		dniField.clear();
+		dniField.sendKeys(dni);
+		
+		WebElement nombreField = driver.findElement(By.name("nombre"));
+		nombreField.click();
+		nombreField.clear();
+		nombreField.sendKeys(nombre);
+		
+		WebElement apellido = driver.findElement(By.name("segundoApellido"));
+		apellido.click();
+		apellido.clear();
+		apellido.sendKeys(segundoApellido);
+		
+		WebElement apellido2 = driver.findElement(By.name("primerApellido"));
+		apellido2.click();
+		apellido2.clear();
+		apellido2.sendKeys(primerApellido);
+		
+		By boton = By.className("btn");
+		driver.findElement(boton).click();
+		
+	}
 	
 	
 	static public void logIn(WebDriver driver, String message, String user, String password) {
@@ -59,5 +86,10 @@ public class PO_PrivateView extends PO_NavView {
 		
 		return elementos;
 	}
+
+
+
+
+	
 
 }
