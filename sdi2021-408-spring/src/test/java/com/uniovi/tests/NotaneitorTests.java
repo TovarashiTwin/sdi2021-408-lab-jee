@@ -13,6 +13,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.uniovi.tests.pageobjects.PO_HomeView;
 import com.uniovi.tests.pageobjects.PO_Properties;
+import com.uniovi.tests.pageobjects.PO_RegisterView;
+import com.uniovi.tests.pageobjects.PO_View;
 import com.uniovi.tests.util.SeleniumUtils;
 
 //Ordenamos las pruebas por el nombre del método
@@ -80,6 +82,56 @@ public class NotaneitorTests{
 		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
 		SeleniumUtils.esperarSegundos(driver, 2);
 	}
+	
+	//PR05. Pruebadelformularioderegistro. registrocondatoscorrectos
+	@Test public void PR05() {
+		//Vamosalformularioderegistro
+		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");//Rellenamosel formulario.
+		PO_RegisterView.fillForm(driver, "77777778A", "Josefo", "Perez", "77777", "77777");//Comprobamosqueentramosenlasecciónprivada
+		PO_View.checkElement(driver, "text", "Notas del usuario");
+	}
+	
+	//PR06. Pruebadelformularioderegistro. DNI repetidoenlaBD, Nombrecorto, .... pagination pagination-centered, Error.signup.dni.length
+	@Test public void PR06() {
+		
+		//Vamosalformularioderegistro
+		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+		//Rellenamosel formulario.
+		PO_RegisterView.fillForm(driver, "99999990A", "Josefo", "Perez", "77777", "77777");
+		PO_View.getP();
+		
+		//COmprobamos el error deDNI repetido.
+		PO_RegisterView.checkKey(driver, "Error.signup.dni.duplicate", PO_Properties.getSPANISH() );
+		
+		//Comprobamos dni corto
+		PO_RegisterView.fillForm(driver, "1234", "Josefo", "Perez", "77777", "77777");
+		PO_RegisterView.checkKey(driver, "Error.signup.dni.length", PO_Properties.getSPANISH() );
+		
+		//Comprobamos dni largo
+		PO_RegisterView.fillForm(driver, "0123456789012345678912345", "Josefo", "Perez", "77777", "77777");
+		PO_RegisterView.checkKey(driver, "Error.signup.dni.length", PO_Properties.getSPANISH() );
+		
+		//COmprobamos el error deNombrecorto.
+		PO_RegisterView.fillForm(driver, "99999990B", "Jose", "Perez","77777", "77777");//Rellenamosel formulario.		
+		PO_RegisterView.checkKey(driver, "Error.signup.name.length", PO_Properties.getSPANISH() );
+		
+		//Comprobamos la longitud del apellido
+		PO_RegisterView.fillForm(driver, "99999990B", "Josefo", "Per", "77777", "77777");//Rellenamosel formulario.
+		PO_RegisterView.checkKey(driver, "Error.signup.lastName.length", PO_Properties.getSPANISH() );
+		
+		//Comprobamos la longitud de la contraseña
+		PO_RegisterView.fillForm(driver, "99999990B", "Josefo", "Perez", "777", "777");
+		PO_RegisterView.checkKey(driver, "Error.signup.password.length", PO_Properties.getSPANISH() );
+		
+		//Comprobamos la coincidencia de la contraseña 
+		PO_RegisterView.fillForm(driver, "99999990B", "Josefo", "Perez", "77777", "77778");
+		PO_RegisterView.checkKey(driver, "Error.signup.passwordConfirm.coincidence", PO_Properties.getSPANISH() );
+		
+	
+		
+	}
+	
+	
 	@Test public void test() {
 		fail("Not yet implemented");
 		}
