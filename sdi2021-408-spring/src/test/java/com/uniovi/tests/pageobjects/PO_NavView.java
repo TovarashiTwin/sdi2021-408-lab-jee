@@ -32,7 +32,7 @@ public class PO_NavView extends PO_View {
 		List<WebElement> elementos= SeleniumUtils.EsperaCargaPagina(driver, "id", "btnLanguage", getTimeout());
 		elementos.get(0).click();//Esperamos a que aparezca el menú de opciones.
 		elementos= SeleniumUtils.EsperaCargaPagina(driver, "id", "languageDropdownMenuButton", getTimeout());
-		//SeleniumUtils.esperarSegundos(driver, 2);
+		SeleniumUtils.esperarSegundos(driver, 2);
 		//CLickamos laopciónIngléspartiendodelaopciónEspañol
 		elementos= SeleniumUtils.EsperaCargaPagina(driver, "id", textLanguage, getTimeout());
 		elementos.get(0).click();
